@@ -1,0 +1,38 @@
+#include <flipper/core.h>
+#include <flipper/button.h>
+#include <flipper/led.h>
+#include <flipper/vibration.h>
+#include <flipper.h>
+
+#define HOT_COUNT_THRESHOLD 4
+
+int main() {
+    int count = 0;
+
+    while (1) {
+        flipper_wait_for_button_press();
+        switch (flipper_button()) {
+            case UP_BUTTON:
+                count += 1;
+                break;
+            case CENTER_BUTTON:
+                break;
+            case DOWN_BUTTON:
+                count -= 1;
+                break;
+        }
+
+        if (count >= HOT_COUNT_THRESHOLD || count <= -HOT_COUNT_THRESHOLD) {
+            flipper_vibrate_pulse();
+        }
+
+        flipper_sleep(100); // Pause for debounce
+
+        flipper_clear_events();
+    }
+
+    return 0;
+}
+
+
+
