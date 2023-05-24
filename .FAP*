@@ -1,0 +1,53 @@
+#
+# Blackjack Counting FAP for Flipper Zero
+#
+
+language = "c"
+
+includes = [
+    "<flipper/core.h>",
+    "<flipper/button.h>",
+    "<flipper/led.h>",
+    "<flipper/vibration.h>",
+    "<flipper.h>"
+]
+
+init_code = '''
+lf_return_t ret;
+ret = lf_initialize();
+if (ret < 0) {
+    return ret;
+}
+'''
+
+code = '''
+#define HOT_COUNT_THRESHOLD 4
+
+int main() {
+    int count = 0;
+
+    while (1) {
+        lf_wait_for_button_press();
+        switch (lf_button()) {
+            case LF_BUTTON_UP:
+                count += 1;
+                break;
+            case LF_BUTTON_CENTER:
+                break;
+            case LF_BUTTON_DOWN:
+                count -= 1;
+                break;
+        }
+
+        if (count >= HOT_COUNT_THRESHOLD || count <= -HOT_COUNT_THRESHOLD) {
+            lf_vibrate_pulse();
+        }
+
+        lf_sleep(100); // Pause for debounce
+
+        lf_clear_events();
+    }
+
+    return 0;
+}
+'''
