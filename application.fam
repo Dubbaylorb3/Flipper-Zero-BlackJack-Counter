@@ -6,6 +6,7 @@ App(
     requires=["gui"],
     stack_size=1 * 1024,
     order=30,
-    fap_icon="canvas_draw_icon(canvas, 32, 16, &I_Temperature_16x16);canvas_draw_box(canvas, 34, 18, 3, 5);canvas_draw_box(canvas, 33, 19, 3, 5);",
+    fap_icon="blackjack_10px.png",
     fap_category="Misc",
+    fap_icon_assets="assets" 
 )
