@@ -1,0 +1,11 @@
+App(
+    appid="BlackJack_Counter",
+    name="BlackJack Counter",
+    apptype=FlipperAppType.EXTERNAL,
+    entry_point="BlackJack_Counter_app",
+    requires=["gui"],
+    stack_size=1 * 1024,
+    order=30,
+    fap_icon="canvas_draw_icon(canvas, 32, 16, &I_Temperature_16x16);canvas_draw_box(canvas, 34, 18, 3, 5);canvas_draw_box(canvas, 33, 19, 3, 5);",
+    fap_category="Misc",
+)
